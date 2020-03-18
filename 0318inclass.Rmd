@@ -10,27 +10,70 @@ knitr::opts_chunk$set(echo = TRUE)
 ## R Markdown
 
 ## packages
-install.packages(c("googlesheets4"))
+```{r}
+install.packages(c("googlesheets4","dplyr","stringr","lubridate"))
 library(googlesheets4)
+library(dplyr)
+library(stringr)
+library(lubridate)
+install.packages(c("tidyverse"))
+library(tidyverse)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+hypothesisData <- read_csv("https://www.dropbox.com/s/0etoflih5eqc0bc/hypothesisData.csv?dl=1")
+exDataPost80s <- read_csv("https://www.dropbox.com/s/rc6t40gsxduysz6/exDataPost80s.csv?dl=1")
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
 ```
 
-
-```{r cars}
-summary(cars)
+```{r}
+a <-2
+b = 3
+a+b
+```
+```{r}
+my_108_total_credits <- 15
+_108_total_credits <- 15
+108_total_credits <- 15
+_my_108_total_credits <- 15
+my.108.total_credits <- 15
+.108.total_credits <- 15 # 隱藏變數
+.my.108.total_credits <- 15
+我的108學年總學分數 <- 15
+`我的108學年總學分數` <- 15 # 特殊名稱處理，`不是名稱的一部份
+`.108.total_credits` <- 15
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+`我的年紀` <- 126
+my_age <- `我的年紀`
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+vNum1 <- c(-1,5)
+vNum2 <- c(2,3)
+vNum4 <- c() # 空向量
+
+vNum3 <- c(vNum2, vNum1)
+vNum4 <- c(vNum4, vNum1) # 向量疊代 （recursive vector concatenate）
+```
+
+```{r}
+library(httr)
+library(dplyr)
+GET("https://api.github.com/repos/chienyay/108-2-56-inclass-practice/commits") %>%
+  content() %>%
+  View()
+```
+
+```{r}
+library(googlesheets4)
+`出席狀況表單網址` <- "https://docs.google.com/spreadsheets/d/1oB-5hj1pO5g8FMpZbA7RgIG8NvCRx6WvLPwvleCEV4Q/edit?usp=sharing"  # 缺乏定義值
+ss <- as_sheets_id(`出席狀況表單網址`)
+homework_sheet <- sheets_read(ss,sheet=1)
+
+```
+
+```{r}
+logi1 <- c(T,TRUE,F,FALSE,FALSE)
+typeof(logic1)
+```
