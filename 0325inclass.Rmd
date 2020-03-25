@@ -1,0 +1,42 @@
+---
+title: "0325inclass"
+output: html_document
+---
+```{r}
+# 10位學生的主系
+majors10_char <- c('經濟學系','社會學系','社會學系','經濟學系','經濟學系','社會學系','經濟學系','經濟學系','經濟學系','社會學系')
+
+typeof(majors10_char)
+class(majors10_char)
+majors10_factor <- factor(majors10_char)
+# 或
+majors10_factor <- factor(
+  c('經濟學系','社會學系','社會學系','經濟學系','經濟學系','社會學系','經濟學系','經濟學系','經濟學系','社會學系')
+)
+
+typeof(majors10_factor)
+class(majors10_factor)
+
+as.integer(majors10_factor) 
+```
+
+```{r}
+studentId <- c(410773002, 410773015)
+IDchangetochar <- as.character(studentId)
+class(IDchangetochar)
+studentId <- as.character(studentId)
+```
+
+##Date and Time
+```{r}
+#library(lubridate)
+#browseURL("https://docs.google.com/spreadsheets/d/1EAG49qDKPWWi0ebkVr29TLrvVnoBPfkvxYY-J3xLAHY/edit#gid=458686645")
+
+TPEtime <- ymd_hms("2020-03-11 12:55:30",tz="Asia/Taipei")
+PARIStime <- ymd_hms("2020-02-13 15:33:10",tz="Europe/Paris")
+
+TPEtime <- as.numeric(TPEtime)
+PARIStime <- as.numeric(PARIStime)
+
+caltime <- TPEtime-PARIStime
+```
