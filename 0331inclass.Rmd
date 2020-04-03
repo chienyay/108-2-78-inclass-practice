@@ -1,0 +1,93 @@
+---
+title: "0331inclass"
+output: html_document
+---
+
+##list
+1.lsit 的好處： 每個元素值可以是不同的type物件值。
+```{r}
+#用vector儲存:只能儲存同樣type的物件值
+c("2020-03-31-T13:40:55z",
+  "一芳",
+  "2",
+  "水果茶")
+
+# 用list儲存
+library(lubridate)
+list(
+  ymd_hms("2020-03-31T13:40:55Z"),
+  "一芳",
+  2,
+  "水果茶"
+)
+```
+2.list 的物件值可以是vector形式，也可以是list形式
+```{r}
+
+# list含兩個vectors:
+`小明108學年課表A` <- list(
+  c("108-1","高級會計學","高等統計學"),
+  c("108-2","食在拉丁美洲")
+)
+print(`小明108學年課表A`)
+
+# list含兩個lists: 遇到list的時候會把每一層剝開給你看
+`小明108學年課表B` <- list(
+  list("108-1","高級會計學","高等統計學"),
+  list("108-2","食在拉丁美洲")
+)
+print(`小明108學年課表B`)
+
+# list含兩個lists, 子層list又各含兩個vectors
+`小明108學年課表C` <- list(
+  list(
+    c("108-1"), # 可只寫 "108-1"
+    c("高級會計學","高等統計學")
+       ),
+  list(
+    c("108-2"),
+    c("食在拉丁美洲")
+  )
+)
+print(`小明108學年課表C`)
+```
+3.物件值可以取名
+```{r}
+# list含兩個lists, 子層list又各含兩個vectors
+`小明108學年課表D` <- list(
+  `108學年第1學期`=list( #list 裡面物件也要遵守命名規則：中文要用反頓點刮起來
+    semester=c("108-1"), # 可只寫 "108-1"
+    courses=c("高級會計學","高等統計學")
+       ),
+  `108學年第2學期`=list(
+    semester=c("108-2"),
+    courses=c("食在拉丁美洲")
+  )
+)
+print(`小明108學年課表D`)
+```
+
+```{r}
+library(jsonlite)
+toJSON(commit)
+```
+
+練習題
+```{r}
+`小明` <- list(
+  `108學年第1學期` <- list(
+    list("Alice老師","個體經濟學",85),
+    list("Mark老師","總體經濟學",73)
+  )
+  `108學年第1學期` <- list(
+    list("Jason老師","作業研究",90)
+  )
+)
+```
+
+物件儲存
+```{r}
+save(commit,listExample,`小明108學年課表D`,file="today.Rda")
+
+load("today.Rda")
+```
